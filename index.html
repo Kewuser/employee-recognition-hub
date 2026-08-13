@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TD&E Rewards &amp; Recognition Dashboard — Wireframe</title>
+<style>
+:root{
+  --primary:#0086EA;        /* WWT Light Blue */
+  --primary-tint:#99CFF7;
+  --primary-tint2:#E6F4FF;
+  --secondary:#1C0087;      /* WWT Dark Blue */
+  --navy:#1D1E48;
+  --royal:#162FB4;
+  --violet:#330072;
+  --red:#EE282A;            /* accent only */
+  --orange:#FB550E;
+  --pink:#E31C79;
+  --ink:#262626;
+  --ink-light:#6B6B76;
+  --bg:#FFFFFF;
+  --bg-soft:#F5F7FA;
+  --border:#E1E4EA;
+  --green:#1E9E5A;
+  --yellow:#D9A400;
+  --radius:14px;
+  --shadow:0 2px 10px rgba(10,11,25,0.06);
+  --shadow-hover:0 8px 24px rgba(10,11,25,0.10);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink); background:var(--bg-soft);
+  line-height:1.5;
+}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+h1,h2,h3,h4{font-weight:700;margin:0 0 8px;}
+p{margin:0 0 12px;color:var(--ink);}
+.eyebrow{
+  text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:700;color:var(--primary);margin-bottom:6px;
+}
+.note{
+  background:#FFF7E0;border:1px solid #F0D480;color:#6b5400;border-radius:10px;padding:10px 14px;font-size:13px;margin:14px 0;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--secondary);font-size:16px;}
+.brand .mono{
+  width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--royal),var(--navy));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;
+}
+.nav-links{display:flex;gap:22px;font-size:14px;font-weight:600;color:var(--ink-light);}
+.nav-links a:hover{color:var(--primary);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:11px 20px;
+  font-weight:700;font-size:14px;cursor:pointer;border:2px solid transparent;transition:.15s ease;white-space:nowrap;
+}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:#006fc4;}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary);}
+.btn-outline:hover{background:var(--primary-tint2);}
+.btn-white{background:#fff;color:var(--secondary);}
+.btn-white:hover{background:var(--primary-tint2);}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:8px;}
+
+/* Floating persistent mobile nominate button */
+.fab{
+  position:fixed;bottom:22px;right:22px;z-index:60;box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+/* ===== HERO ===== */
+.hero{
+  background:radial-gradient(circle at 30% 30%, var(--royal), var(--navy) 70%);
+  color:#fff;padding:56px 0 46px;position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(45deg, transparent 46%, rgba(255,255,255,.06) 47%, rgba(255,255,255,.06) 49%, transparent 50%);
+}
+.hero-inner{position:relative;display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:space-between;}
+.hero-copy{flex:1 1 420px;}
+.hero-copy .eyebrow{color:var(--primary-tint);}
+.hero h1{font-size:clamp(28px,4vw,40px);font-weight:300;margin-bottom:10px;}
+.hero h1 b{font-weight:700;}
+.hero p.sub{font-size:17px;color:#DCE6FF;max-width:520px;margin-bottom:26px;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px;}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:#C9D6FF;}
+.hero-stats b{display:block;color:#fff;font-size:20px;}
+
+.countdown-card{
+  flex:0 0 300px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(6px);border-radius:var(--radius);padding:22px;
+}
+.countdown-card .eyebrow{color:var(--primary-tint);}
+.countdown-award{font-size:15px;font-weight:700;margin-bottom:14px;}
+.countdown-grid{display:flex;gap:10px;}
+.countdown-unit{
+  flex:1;background:rgba(255,255,255,.12);border-radius:10px;padding:10px 4px;text-align:center;
+}
+.countdown-unit .num{font-size:24px;font-weight:700;display:block;}
+.countdown-unit .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#C9D6FF;}
+.countdown-status{margin-top:12px;font-size:12px;font-weight:700;padding:6px 10px;border-radius:20px;display:inline-block;}
+
+/* ===== SECTION SHELL ===== */
+section{padding:52px 0;}
+section.alt{background:#fff;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+.section-head h2{font-size:24px;color:var(--secondary);}
+.section-head p{color:var(--ink-light);margin:0;max-width:560px;}
+
+/* ===== QUICK ACTION TILES ===== */
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+.tile{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;box-shadow:var(--shadow);
+  cursor:pointer;transition:.15s ease;
+}
+.tile:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);border-color:var(--primary-tint);}
+.tile .icon{
+  width:42px;height:42px;border-radius:10px;background:var(--primary-tint2);color:var(--primary);
+  display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;
+}
+.tile h4{font-size:15px;margin-bottom:4px;color:var(--secondary);}
+.tile p{font-size:13px;color:var(--ink-light);margin:0;}
+.tile.wizard{background:linear-gradient(135deg,var(--primary-tint2),#fff);border-color:var(--primary);}
+.tile.wizard .icon{background:var(--primary);color:#fff;}
+
+/* ===== AWARD GALLERY ===== */
+.gallery-controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;align-items:center;}
+.search-box{
+  flex:1 1 260px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;
+}
+.search-box input{border:none;outline:none;font-size:14px;width:100%;font-family:inherit;}
+.filter-chip{
+  border:1px solid var(--border);background:#fff;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;
+  cursor:pointer;color:var(--ink-light);
+}
+.filter-chip.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+.award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.award-card{
+  background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;transition:.15s ease;
+}
+.award-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.award-card .band{height:6px;}
+.award-card .content{padding:20px;flex:1;display:flex;flex-direction:column;}
+.badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em;}
+.badge.type-individual{background:#E6F4FF;color:var(--primary);}
+.badge.type-team{background:#F1E9FB;color:var(--violet);}
+.badge.type-leadership{background:#E7E8F5;color:var(--navy);}
+.badge.freq{background:var(--bg-soft);color:var(--ink-light);}
+.award-card h3{font-size:17px;color:var(--secondary);margin-bottom:6px;}
+.award-card .desc{font-size:13.5px;color:var(--ink-light);margin-bottom:14px;flex:1;}
+.meta-list{font-size:12.5px;color:var(--ink);margin-bottom:14px;}
+.meta-list div{display:flex;justify-content:space-between;padding:4px 0;border-top:1px dashed var(--border);}
+.meta-list div:first-child{border-top:none;}
+.meta-list span.k{color:var(--ink-light);}
+.card-actions{display:flex;gap:8px;}
+.card-actions .btn{flex:1;}
+
+/* ===== DEADLINES ===== */
+.deadline-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.deadline-table th{
+  background:var(--secondary);color:#fff;text-align:left;padding:14px 16px;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;
+}
+.deadline-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-size:14px;}
+.deadline-table tr:last-child td{border-bottom:none;}
+.status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;}
+.status-dot.green{background:var(--green);}
+.status-dot.yellow{background:var(--yellow);}
+.status-dot.red{background:var(--red);}
+.status-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+.deadline-table td:nth-child(3){white-space:nowrap;}
+.deadline-table td:nth-child(5){white-space:nowrap;}
+.status-pill.green{background:#E4F7EC;color:var(--green);}
+.status-pill.yellow{background:#FFF6DC;color:#8A6D00;}
+.status-pill.red{background:#FDEAEA;color:var(--red);}
+.status-dot.blue{background:var(--primary);}
+.status-pill.blue{background:#E6F4FF;color:var(--primary);}
+.status-dot.grey{background:#8A8F9C;}
+.status-pill.grey{background:#EEF0F4;color:#4A4F5C;}
+.days-left{font-weight:700;}
+.source-tag{font-size:11px;color:var(--ink-light);font-style:italic;}
+
+/* ===== ELIGIBILITY MATRIX ===== */
+.matrix-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.matrix-table th{background:var(--bg-soft);color:var(--secondary);padding:14px 16px;font-size:13px;text-align:left;border-bottom:2px solid var(--border);}
+.matrix-table td{padding:14px 16px;border-bottom:1px solid var(--border);font-size:14px;text-align:left;}
+.matrix-table td.center, .matrix-table th.center{text-align:center;}
+.check{color:var(--green);font-weight:700;font-size:16px;}
+
+/* ===== ACCORDION ===== */
+.accordion-item{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.accordion-head{
+  display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;font-weight:700;color:var(--secondary);
+}
+.accordion-head .chevron{transition:.2s ease;color:var(--primary);}
+.accordion-item.open .chevron{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .25s ease;padding:0 20px;}
+.accordion-item.open .accordion-body{max-height:900px;padding:0 20px 20px;}
+.accordion-body h5{font-size:13px;color:var(--primary);text-transform:uppercase;letter-spacing:.03em;margin:14px 0 4px;}
+.accordion-body p{font-size:13.5px;margin:0 0 4px;color:var(--ink);}
+
+/* ===== NOMINATION GUIDE ===== */
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+.example-card{border-radius:var(--radius);padding:18px 20px;font-size:14px;}
+.example-card.weak{background:#FDEAEA;border:1px solid #F5C2C2;}
+.example-card.strong{background:#E4F7EC;border:1px solid #B9E7CC;}
+.example-card .tag{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:block;}
+.example-card.weak .tag{color:var(--red);}
+.example-card.strong .tag{color:var(--green);}
+.sai-flow{display:flex;gap:12px;flex-wrap:wrap;}
+.sai-step{flex:1 1 200px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;}
+.sai-step .num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-bottom:10px;}
+
+/* ===== RECOGNITION WALL ===== */
+.wall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.wall-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:18px;box-shadow:var(--shadow);}
+.wall-top{display:flex;gap:12px;align-items:center;margin-bottom:12px;}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--royal));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.wall-name{font-weight:700;font-size:14px;color:var(--secondary);}
+.wall-team{font-size:12px;color:var(--ink-light);}
+.wall-award{display:inline-block;background:var(--primary-tint2);color:var(--primary);font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-bottom:10px;}
+.wall-quote{font-size:13.5px;color:var(--ink);}
+.spotlight{
+  background:linear-gradient(135deg,var(--navy),var(--royal));color:#fff;border-radius:var(--radius);padding:26px;
+  display:flex;gap:20px;align-items:center;margin-bottom:22px;
+}
+.spotlight .avatar{width:64px;height:64px;font-size:22px;flex-shrink:0;}
+.spotlight .eyebrow{color:var(--primary-tint);}
+
+/* ===== METRICS ===== */
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.metric-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:20px;text-align:left;box-shadow:var(--shadow);}
+.metric-card .num{font-size:30px;font-weight:700;color:var(--secondary);}
+.metric-card .lbl{font-size:13px;color:var(--ink-light);}
+.metric-card .trend{font-size:12px;color:var(--green);font-weight:700;margin-top:4px;}
+
+/* ===== FAQ ===== */
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:last-child{border-bottom:none;}
+
+/* ===== FOOTER ===== */
+footer{background:var(--secondary);color:#fff;padding:36px 0;}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center;}
+footer a{color:var(--primary-tint);font-weight:600;font-size:13px;}
+.gradient-rule{height:3px;background:linear-gradient(90deg,var(--red),var(--secondary),var(--primary));border:none;margin:0;}
+
+/* ===== MODAL / WIZARD ===== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(10,11,25,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:16px;max-width:520px;width:100%;padding:28px;position:relative;overflow:hidden;}
+.confetti-piece{
+  position:absolute;display:block;border-radius:2px;pointer-events:none;z-index:5;
+  animation:confetti-burst 1.1s ease-out forwards;
+}
+@keyframes confetti-burst{
+  0%{ transform:translate(0,0) rotate(0deg); opacity:1; }
+  100%{ transform:translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity:0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .confetti-piece{ animation:none; display:none; }
+}
+.modal .close{position:absolute;top:16px;right:18px;cursor:pointer;font-size:20px;color:var(--ink-light);border:none;background:none;}
+.wizard-progress{display:flex;gap:6px;margin-bottom:18px;}
+.wizard-progress span{flex:1;height:4px;border-radius:4px;background:var(--border);}
+.wizard-progress span.done{background:var(--primary);}
+.wizard-q{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+.wizard-options{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+.wizard-option{
+  border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;
+}
+.wizard-option:hover{border-color:var(--primary);background:var(--primary-tint2);}
+.wizard-result{text-align:left;}
+.wizard-result .result-badge{background:var(--primary-tint2);color:var(--primary);font-weight:700;font-size:12px;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+
+/* Responsive */
+@media (max-width:960px){
+  .tiles{grid-template-columns:repeat(2,1fr);}
+  .award-grid{grid-template-columns:repeat(2,1fr);}
+  .wall-grid{grid-template-columns:repeat(2,1fr);}
+  .metric-grid{grid-template-columns:repeat(2,1fr);}
+  .nav-links{display:none;}
+  .guide-grid{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  .tiles{grid-template-columns:1fr;}
+  .award-grid{grid-template-columns:1fr;}
+  .wall-grid{grid-template-columns:1fr;}
+  .metric-grid{grid-template-columns:1fr 1fr;}
+  .hero-inner{flex-direction:column;align-items:stretch;}
+  .countdown-card{flex:1 1 auto;}
+  .deadline-table{display:block;overflow-x:auto;white-space:nowrap;}
+  .topbar-inner .btn-primary span.full{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="mono">TD</span> TD&amp;E Rewards &amp; Recognition</div>
+    <div class="nav-links">
+      <a href="#awards">Awards</a>
+      <a href="#deadlines">Deadlines</a>
+      <a href="#wall">Recognition Wall</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <button class="btn btn-primary btn-sm" data-action="open-wizard">🎗️ <span class="full">Nominate Someone</span></button>
+  </div>
+</div>
+<div class="gradient-rule"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">TD&amp;E RECOGNITION PROGRAM</div>
+      <h1><b>Recognition starts with you.</b></h1>
+      <p class="sub">Celebrate the people who make a difference every day. Find the right award and submit a nomination in under a minute.</p>
+      <div class="hero-actions">
+        <button class="btn btn-white" data-action="open-wizard">🎗️ Nominate Someone</button>
+        <button class="btn btn-outline" style="border-color:#fff;color:#fff" data-jump="awards">View Award Details</button>
+      </div>
+      <div class="hero-stats">
+        <div><b>12</b>Active recognition programs</div>
+        <div><b>$70,675</b>Paid via Customer Delight (2024)</div>
+        <div><b>$1,000</b>Top spot bonus (TD&E Award)</div>
+      </div>
+    </div>
+    <div class="countdown-card">
+      <div class="eyebrow">Next Deadline</div>
+      <div class="countdown-award" id="hero-countdown-award">Loading…</div>
+      <div class="countdown-grid" id="hero-countdown">
+        <div class="countdown-unit"><span class="num">00</span><span class="lbl">Days</span></div>
+        <div class="countdown-unit"><span class="num">00</span><span class="lbl">Hours</span></div>
+        <div class="countdown-unit"><span class="num">00</span><span class="lbl">Mins</span></div>
+        <div class="countdown-unit"><span class="num">00</span><span class="lbl">Secs</span></div>
+      </div>
+      <span class="countdown-status" id="hero-countdown-status"></span>
+      <div style="margin-top:12px;"><button class="btn btn-white btn-sm" id="hero-countdown-ics" data-ics-id="pmo-hpt-mvp">📅 Add to Calendar</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ACTION CENTER -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Quick Actions</h2>
+        <p>Everything you need, one click away.</p>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile wizard" data-action="open-wizard">
+        <div class="icon">✨</div>
+        <h4>Not sure which award?</h4>
+        <p>Take the 60-second quiz</p>
+      </div>
+      <div class="tile" onclick="alert('Opens the nomination form')">
+        <div class="icon">📝</div>
+        <h4>Submit a Nomination</h4>
+        <p>One-click access to the form</p>
+      </div>
+      <div class="tile" data-jump="deadlines">
+        <div class="icon">⏰</div>
+        <h4>Upcoming Deadlines</h4>
+        <p>See what's closing soon</p>
+      </div>
+      <div class="tile" data-jump="awards">
+        <div class="icon">🏆</div>
+        <h4>Award Directory</h4>
+        <p>Browse all TD&amp;E awards</p>
+      </div>
+      <div class="tile" data-jump="wall">
+        <div class="icon">🌟</div>
+        <h4>Past Winners</h4>
+        <p>See who's been recognized</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARD GALLERY -->
+<section class="alt" id="awards">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Award Gallery</h2>
+        <p>Search or filter to find the right award for your nominee.</p>
+      </div>
+    </div>
+    <p class="note">Sourced from the TD&E Recognition Programs reference, the TD&E Recognition &amp; Rewards Toolkit, the TD&E Award Guidelines, and the public Celebration Station page, with direct corrections from TD&E Strategic Initiatives (as of July 2026). Internal materials also reference additional programs (e.g. Super WOW, Culture &amp; Values Spotlight, Certifications) without full published criteria — they're left out here rather than guessed at.</p>
+    <p class="note"><strong>Note:</strong> award amounts may be adjusted to ensure fairness across regions commensurate with regional COLA standards.</p>
+    <div class="gallery-controls">
+      <div class="search-box">🔍 <input id="award-search" placeholder="Search awards, keywords, eligibility..." oninput="filterAwards()"></div>
+      <button class="filter-chip active" data-filter="all" onclick="setFilter('all',this)">All</button>
+      <button class="filter-chip" data-filter="ongoing" onclick="setFilter('ongoing',this)">Ongoing</button>
+      <button class="filter-chip" data-filter="quarterly" onclick="setFilter('quarterly',this)">Quarterly</button>
+      <button class="filter-chip" data-filter="annual" onclick="setFilter('annual',this)">Annual</button>
+      <button class="filter-chip" data-filter="leadership" onclick="setFilter('leadership',this)">Leadership-Selected</button>
+    </div>
+    <div class="gallery-controls" style="margin-top:-10px;">
+      <span style="font-size:13px;font-weight:700;color:var(--ink-light);">My team:</span>
+      <button class="filter-chip team-chip active" data-team="all" onclick="setTeamFilter('all',this)">Everyone</button>
+      <button class="filter-chip team-chip" data-team="ats" onclick="setTeamFilter('ats',this)">ATS</button>
+      <button class="filter-chip team-chip" data-team="pmo" onclick="setTeamFilter('pmo',this)">PMO</button>
+      <button class="filter-chip team-chip" data-team="sr" onclick="setTeamFilter('sr',this)">Strategic Resourcing</button>
+      <button class="filter-chip team-chip" data-team="regional" onclick="setTeamFilter('regional',this)">Regional Mgmt</button>
+      <button class="filter-chip team-chip" data-team="general" onclick="setTeamFilter('general',this)">General TD&E</button>
+    </div>
+    <div class="award-grid" id="award-grid"></div>
+  </div>
+</section>
+
+<!-- CRITICAL DEADLINES -->
+<section id="deadlines">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Critical Deadlines</h2>
+        <p>🟢 More than 30 days &nbsp; 🟡 Within 30 days &nbsp; 🔴 Within 7 days &nbsp; 🔵 Ongoing, no deadline &nbsp; ⚪ Leadership-selected, no public deadline</p>
+      </div>
+    </div>
+    <table class="deadline-table">
+      <thead><tr><th>Award</th><th>Deadline</th><th>Status</th><th>Days Remaining</th><th title="Downloads a .ics file — open the downloaded file to add it to Outlook">Calendar</th></tr></thead>
+      <tbody id="deadline-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHO CAN NOMINATE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Who Can Nominate?</h2>
+        <p>Recognition works both ways across every level of TD&amp;E.</p>
+      </div>
+    </div>
+    <table class="matrix-table">
+      <thead><tr><th>Role</th><th class="center">Can Nominate</th><th class="center">Can Be Nominated</th></tr></thead>
+      <tbody>
+        <tr><td>Any TD&E Employee</td><td class="center check">✔</td><td class="center check">✔</td></tr>
+        <tr><td>Manager</td><td class="center check">✔</td><td class="center check">✔</td></tr>
+        <tr><td>Director / Area Director+</td><td class="center check">✔</td><td class="center check">✔</td></tr>
+        <tr><td>Customer (via a TD&E employee)</td><td class="center check">✔ (Customer Delight only)</td><td class="center">—</td></tr>
+        <tr><td>SR / PMO Contractor / Contingent Worker</td><td class="center">—</td><td class="center check">✔ (Customer Delight only)</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Nomination rights vary a lot by award: the TD&E Award and BIG Thank You are both manager-submitted, and the five Strategic Resourcing MVPs (SEM, RM, DST, SPA, SRX/GSPM) are nominated internally by leadership with no open form. Interns aren't explicitly addressed in current program guidelines — check with TD&E Strategic Initiatives before nominating one. See each award's card for its specific rule.</p>
+  </div>
+</section>
+
+<!-- AWARD DETAILS LIBRARY -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Award Details Library</h2>
+        <p>Full purpose, criteria, and timeline for every award.</p>
+      </div>
+    </div>
+    <div id="accordion-list"></div>
+  </div>
+</section>
+
+<!-- HOW TO WRITE A GREAT NOMINATION -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>How to Write a Great Nomination</h2>
+        <p>Specific stories win. Here's the framework.</p>
+      </div>
+    </div>
+    <div class="guide-grid">
+      <div class="example-card weak">
+        <span class="tag">❌ Weak nomination</span>
+        "John helped the team."
+      </div>
+      <div class="example-card strong">
+        <span class="tag">✅ Strong nomination</span>
+        "John led the effort to resolve a customer-impacting issue two weeks ahead of schedule, coordinating across three teams and reducing support tickets by 40%."
+      </div>
+    </div>
+    <div class="sai-flow">
+      <div class="sai-step"><div class="num">1</div><h4>Situation</h4><p style="font-size:13px;color:var(--ink-light)">What was the challenge or context?</p></div>
+      <div class="sai-step"><div class="num">2</div><h4>Action</h4><p style="font-size:13px;color:var(--ink-light)">What did they specifically do?</p></div>
+      <div class="sai-step"><div class="num">3</div><h4>Impact</h4><p style="font-size:13px;color:var(--ink-light)">What changed as a result? Use numbers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION WALL -->
+<section id="wall">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Employee Recognition Wall</h2>
+        <p>Recent shout-outs from across TD&amp;E.</p>
+      </div>
+    </div>
+    <div class="spotlight">
+      <div class="avatar">MP</div>
+      <div>
+        <div class="eyebrow">⭐ July Spotlight</div>
+        <h3 style="color:#fff;margin-bottom:4px;">Maria Patel — Network Delivery</h3>
+        <p style="color:#DCE6FF;margin:0;">Recognized with the True Dedication &amp; Excellence (TD&amp;E) Award for redesigning the client onboarding runbook, cutting setup time by 35% across 12 accounts.</p>
+      </div>
+    </div>
+    <div class="wall-grid" id="wall-grid"></div>
+  </div>
+</section>
+
+<!-- PROGRAM METRICS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Program Metrics</h2>
+        <p>Participation, not competition — here's how TD&amp;E is showing up for each other. Figures below are real Q1 2026 results from the Strategic Initiatives dashboard; connect Power BI for a live, rolling view.</p>
+      </div>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="num">156</div><div class="lbl">Customer Delights YTD</div><div class="trend">79 FTE/FTC + 77 SR contractor/contingent — Celebration Station Depot</div></div>
+      <div class="metric-card"><div class="num">21</div><div class="lbl">BIG Thank Yous YTD</div><div class="trend">Celebration Station Depot</div></div>
+      <div class="metric-card"><div class="num">$25,250</div><div class="lbl">Paid in recognition rewards</div><div class="trend">Q1 2026 only · 32 teammates also received WWT swag</div></div>
+      <div class="metric-card"><div class="num">12–17</div><div class="lbl">TD&E recognition programs</div><div class="trend">12 confirmed active here; org materials cite up to 17 total</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+    </div>
+    <div id="faq-list"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>TD&amp;E Rewards &amp; Recognition · Interactive wireframe — WWT internal use</div>
+    <div style="display:flex;gap:18px;">
+      <a href="#">Leader Toolkit</a>
+      <a href="#">Recognition Calendar</a>
+      <a href="#">Contact Program Team</a>
+    </div>
+  </div>
+</footer>
+
+<button class="btn btn-primary fab" data-action="open-wizard">🎗️ Nominate</button>
+
+<!-- WIZARD MODAL -->
+<div class="modal-overlay" id="wizard-overlay">
+  <div class="modal">
+    <button class="close" onclick="closeWizard()">✕</button>
+    <div class="wizard-progress">
+      <span id="wp1"></span><span id="wp2"></span><span id="wp3"></span>
+    </div>
+    <div id="wizard-body"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const AWARDS = [
+  {
+    id:'wwwtg', name:'World Wide Way to Go (WWWTG)', type:'team', freq:'ongoing', team:'general',
+    categoryLabel:'Peer-to-Peer', color:'var(--violet)', badgeClass:'type-team',
+    who:'Anyone at WWT',
+    desc:"Send a real-time e-card to celebrate a colleague's Core Values, teamwork, or a simple thanks — anywhere at WWT.",
+    eligibility:'All WWT employees (peer-to-peer)', nominator:'Anyone',
+    deadlineLabel:'Ongoing — no deadline', deadline:null,
+    recognition:"Real-time e-card; recipient's manager is automatically copied (non-monetary)",
+    purpose:'Fosters a culture of appreciation and camaraderie across WWT by making peer recognition instant and visible. Confirmed as the current replacement for the retired Cheers for Peers program.',
+    criteria:"Any moment worth acknowledging — Core Values, teamwork, or a simple thanks or congratulations.",
+    requirements:'A short e-card message describing what you’re recognizing.',
+    examples:'Thanking a colleague on another team for a fast turnaround; congratulating someone on a certification.',
+    timeline:'No cycle — submit any time via ServiceNow.',
+    howTo:'Submit via ServiceNow'
+  },
+  {
+    id:'cd', name:'Customer Delight (CD)', type:'team', freq:'ongoing', team:'general',
+    categoryLabel:'Customer-Driven', color:'var(--pink)', badgeClass:'type-team',
+    who:'Any TD&E employee',
+    desc:'Recognizes a TD&E employee called out by name in an unsolicited customer expression of delight.',
+    eligibility:'TD&E FTEs/FTCs; Strategic Resourcing and PMO contractors/contingent workers also eligible. Other contracted employee types are not eligible.',
+    nominator:'Anyone — the employee forwards the customer’s letter to their manager, who submits it',
+    deadlineLabel:'Ongoing — 1 Incentive Reward per employee per quarter', deadline:null,
+    recognition:'$250 per letter ($500 split evenly if multiple employees are named). SR and PMO contractors/contingent workers receive a link to choose from a selection of items instead of cash. Paid as an Incremental Bonus in the quarter the letter is received.',
+    purpose:'Rewards TD&E employees for outstanding customer service and achieving Customer Delight — a core piece of TD&E’s Vision, Strategy & Execution (VSE).',
+    criteria:'An unsolicited written or verbal customer expression (email, letter, IM, or phone call to the employee’s manager) that specifically describes how delight was achieved and names the employee(s). A plain “thank you” or “good job” does not qualify.',
+    requirements:'Employee forwards the letter to their manager with subject line “Project Number Customer Delight” and the project name/team list in the body. Manager submits it through the online Customer Delight Submission process. Letters covering both FTE/FTC and SR/PMO contractor staff must be submitted twice — once per employee type. Team CDs: contact TD&E Strategic Initiatives (your TD&E Strategic Initiatives contact).',
+    examples:'A client email praising an engineer by name for resolving a critical issue.',
+    timeline:'No fixed submission cycle; capped at 1 Incentive Reward per employee per quarter. Final list reviewed and approved at the discretion of the Chief of Staff. 2024 total: $70,675 paid to 373 individuals.',
+    howTo:'Manager submits via the online Customer Delight Submission process',
+    sourceNote:'Confirmed directly from PS Policy Customer Delight Incentive.docx (v9.0, 7/29/2025, TD&E Strategic Initiatives): the cap is 1 reward per employee per quarter — this supersedes the older "per project" language in the 2024 TD&E Award Guidelines and other secondary sources, which appear to reflect an outdated version of this policy.',
+    sourceNote:'Conflicting cap language: you told us this is capped at 1 reward per person per quarter, but the TD&E Award Guidelines and the public Celebration Station page both describe it as 1 reward per project number per quarter (multiple projects in a quarter = multiple rewards, one long project = only one reward). Please confirm which is current with the CD policy owner before this publishes — the PS Policy Customer Delight Incentive.docx should be the tiebreaker but wasn’t directly accessible to verify.'
+  },
+  {
+    id:'big-thank-you', name:'BIG Thank You', type:'team', freq:'ongoing', team:'general',
+    categoryLabel:'Manager-Led', color:'var(--orange)', badgeClass:'type-team',
+    who:'Any TD&E employee',
+    desc:'Lets managers personally thank someone who exceeded expectations or went above and beyond for teammates.',
+    eligibility:'All TD&E full-time employees (exceptions by request)', nominator:'Manager only',
+    deadlineLabel:'Ongoing — no deadline', deadline:null,
+    recognition:'Personal kudos via text, phone call, email, or handwritten note (non-monetary); confirmation email sent to recipient and manager',
+    purpose:'Makes it easy for managers to recognize great work in the moment, without waiting for a formal cycle.',
+    criteria:"Manager's judgment — exceeding expectations or exceptional support to teammates.",
+    requirements:'A short, personal note from the manager describing what was done.',
+    examples:'A manager sending a handwritten note after someone covered a critical gap.',
+    timeline:'No cycle — manager submits any time via the Celebration Station form.',
+    howTo:'Manager submits via the Celebration Station form'
+  },
+  {
+    id:'leading-excellence', name:'Leading with Excellence (ATS)', type:'individual', freq:'quarterly', team:'ats',
+    categoryLabel:'Merit Award', color:'var(--primary)', badgeClass:'type-individual',
+    who:'ATS employees (90+ days)',
+    desc:'Quarterly recognition of Advanced Technical Solutions (ATS) talent respected by peers as experts in their field.',
+    eligibility:'ATS FTE/FTC, employed 90+ days', nominator:'Anyone (manager or peer)',
+    deadlineLabel:'Close of business CST, 1st Friday of the 3rd month of the quarter', deadline:'2026-09-04',
+    recognition:'$500 spot bonus + recognition on the TD&E All-Hands + Leading with Excellence Award',
+    purpose:"Honors ATS employees who've earned peer respect as subject-matter experts.",
+    criteria:"Tangible contribution to client transformation, relevance to the evolving digital landscape, and skills elevated above peers. Reviewed by the respective Area Director.",
+    requirements:'Nomination submitted via the Leading with Excellence form.',
+    examples:'An engineer whose redesign became the reference architecture other ATS teams now follow.',
+    timeline:'One winner per ATS sub-team (Engineering, Global ES&A, and Day 2 Operations) each quarter. Late submissions roll to the next quarter.',
+    howTo:'Submit via the Leading with Excellence form'
+  },
+  {
+    id:'tde-award', name:'True Dedication & Excellence (TD&E) Award', type:'individual', freq:'quarterly', team:'general',
+    categoryLabel:'Highest Honor', color:'var(--secondary)', badgeClass:'type-individual',
+    who:'Any TD&E employee',
+    desc:'The highest honor in TD&E — extraordinary outcomes through exceptional commitment, skill, and expertise.',
+    eligibility:'Any TD&E full-time employee, regardless of location', nominator:'Managers, using the nomination form',
+    deadlineLabel:'Close of business CST, 1st Friday of the 3rd month of the quarter', deadline:'2026-09-04',
+    recognition:"$1,000 spot bonus (paid with the quarterly MBO, adjusted for regional COLA) + choice of TD&E Award apparel (logo being newly unveiled) + personalized trophy + virtual meeting with Tom Gain and fellow winners + right to use the TD&E Award logo in your email signature",
+    purpose:"Recognizes the employees who best embody WWT's culture and core values and set the example for others.",
+    criteria:'Extraordinary outcomes through unparalleled commitment, skill, and expertise. Winners are selected by Tom Gain and his senior leadership team.',
+    requirements:'Nomination via the Celebration Station form, including two detailed write-up sections — more detail meaningfully improves selection odds.',
+    examples:'A leader who turned around a struggling client relationship and became the model for how the account team operates.',
+    timeline:'Up to 5 recipients per quarter, announced at the quarterly TD&E All-Hands meeting.',
+    howTo:'Submit via the Celebration Station form',
+    sourceNote:'Confirmed directly from the live Celebration Station page (screenshot dated 7/8/26): nominations come from managers. This supersedes the 2024 TD&E Award Guidelines, which restricted nominating to Director/Area Director and above — that document appears to be outdated on this point.'
+  },
+  {
+    id:'pmo-hpt-mvp', name:'PMO HPT-MVP', type:'individual', freq:'quarterly', team:'pmo',
+    categoryLabel:'Merit Award — Tiered', color:'var(--primary)', badgeClass:'type-individual',
+    who:'PMO employees (90+ days)',
+    desc:'Tiered recognition (Month → Quarter → Year) for Infrastructure Services / Staffing Services PMO talent.',
+    eligibility:'PMO employees within Infrastructure or Staffing Services, employed 90+ days', nominator:'Manager or peer',
+    deadlineLabel:'Due by the 15th of each month', deadline:'2026-07-15',
+    recognition:'EoM: $500 spot bonus + certificate + email signature emblem + PMO Practice Page feature + WWT polo. EoQ: $500 spot bonus + plaque + jacket + PMO Practice Page update + eligibility for EoY. EoY: $3,000 spot bonus + special award + Practice Page bio + Leadership Conference invite or training credit.',
+    purpose:'Rewards PMO talent seen as future leaders and specialists, both inside WWT and with customers.',
+    criteria:'Exceptional skill with measurable, positive impact on PMO or project/program outcomes.',
+    requirements:'Nomination via the PMO HPT-MVP form; reviewed by the respective Area Director.',
+    examples:"A PM whose delivery playbook became the standard used across the PMO.",
+    timeline:'EoM: 2 winners/month. EoQ: selected from that quarter’s 3 EoM winners. EoY: selected from the fiscal year’s 4 EoQ winners.',
+    howTo:'Submit via the PMO HPT-MVP form'
+  },
+  {
+    id:'rm-award', name:'Regional Manager of the Quarter', type:'individual', freq:'quarterly', team:'regional',
+    categoryLabel:'Merit Award', color:'var(--primary)', badgeClass:'type-individual',
+    who:'Regional Managers / PDs',
+    desc:'Recognizes the Regional Manager or Program Director driving quality, growth, efficiency, and transformation each quarter.',
+    eligibility:'Any full-time TD&E Regional Manager or Program Director', nominator:'Managers and peers',
+    deadlineLabel:'3rd Wednesday of the last month of the quarter', deadline:'2026-09-16',
+    recognition:'$500 spot bonus + announcement on the RM Monthly All-Hands call',
+    purpose:'Highlights RMs/PDs who flex to shifting priorities and build durable, high-performing teams.',
+    criteria:'Quality, growth, efficiency, and transformation impact, delivered with a customer-focused approach.',
+    requirements:'Nomination via the designated form.',
+    examples:'An RM who rebuilt a struggling account team into a top performer within two quarters.',
+    timeline:'One recipient selected quarterly.',
+    howTo:'Submit via the RM nomination form'
+  },
+  {
+    id:'sem-mvp', name:'Strategic Engagement Manager (SEM) MVP', type:'leadership', freq:'quarterly', team:'sr',
+    categoryLabel:'Leadership-Selected', color:'var(--navy)', badgeClass:'type-leadership',
+    who:'Strategic Engagement Managers',
+    desc:'Recognizes the top SEM on their full body of work each quarter; quarterly winners become the candidate pool for an annual award.',
+    eligibility:'Strategic Engagement Managers (SEMs)',
+    nominator:'Nominated and selected internally by SR Operations leadership (with team feedback) — no open nomination form',
+    deadlineLabel:'Leadership-nominated — no employee-facing deadline', deadline:null,
+    recognition:'$500/quarter, $1,000/year, plus an email signature badge',
+    purpose:'Rewards SEMs for lead generation, hiring-manager relationships, data cleanliness, process efficiency, and special-project engagement.',
+    criteria:'SEM 3.0 performance, tool/data cleanliness, new efficiencies, and volunteering on special projects.',
+    requirements:'No employee submission — SR Operations leadership nominates and votes; leaders don’t vote on their own submissions.',
+    examples:'A SEM whose process fix cut requisition turnaround time across the team.',
+    timeline:'4 quarterly recipients per year; all 4 become candidates for the single Yearly SEM MVP award.',
+    howTo:'Leadership nomination — no open form'
+  },
+  {
+    id:'rm-mvp-sr', name:'Resource Manager (RM) MVP', type:'leadership', freq:'quarterly', team:'sr',
+    categoryLabel:'Leadership-Selected', color:'var(--navy)', badgeClass:'type-leadership',
+    who:'Resource Managers',
+    desc:'Recognizes the top Resource Manager on their full body of work each quarter; quarterly winners become the annual candidate pool.',
+    eligibility:'Resource Managers (Strategic Resourcing)', nominator:'RM leads nominate from their team; RM leadership selects',
+    deadlineLabel:'Leadership-nominated — no employee-facing deadline', deadline:null,
+    recognition:'$500/quarter, $1,000/year',
+    purpose:'Rewards RMs for sales impact, special projects, subject-matter expertise, and data integrity.',
+    criteria:'Sales-recognized customer wins, special projects beyond day-to-day, SME depth, placement/fill-rate results, and data integrity.',
+    requirements:'No employee submission — nominated internally by RM leads.',
+    examples:'An RM who rolled out a new placement workflow now used across the region.',
+    timeline:'One winner per RM team each quarter; quarterly winners become Yearly award nominees.',
+    howTo:'Leadership nomination — no open form'
+  },
+  {
+    id:'dst-mvp', name:'Direct Sourcing Team (DST) MVP', type:'leadership', freq:'quarterly', team:'sr',
+    categoryLabel:'Leadership-Selected', color:'var(--navy)', badgeClass:'type-leadership',
+    who:'Direct Sourcing Team',
+    desc:'Recognizes the top Direct Sourcing Team member on their full body of work each quarter.',
+    eligibility:'Direct Sourcing Team members', nominator:'DST leads nominate; DST leadership selects',
+    deadlineLabel:'Leadership-nominated — no employee-facing deadline', deadline:null,
+    recognition:'$500/quarter, $1,000/year',
+    purpose:'Rewards consistent placement performance, sourcing activity, data integrity, and initiative beyond the core role.',
+    criteria:'Placements/offers, submission quality and speed, data integrity in Bullhorn/Gustav, stakeholder relationships, and initiative beyond the role.',
+    requirements:'No employee submission — nominated internally by DST leads.',
+    examples:'A sourcer who consistently hit sub-3-hour first-submission times while maintaining data accuracy.',
+    timeline:'One winner per quarter; quarterly winners become Yearly award nominees.',
+    howTo:'Leadership nomination — no open form'
+  },
+  {
+    id:'spa-mvp', name:'Staffing Project Analyst (SPA) MVP', type:'leadership', freq:'quarterly', team:'sr',
+    categoryLabel:'Leadership-Selected', color:'var(--navy)', badgeClass:'type-leadership',
+    who:'Staffing Project Analysts',
+    desc:'Recognizes the top Staffing Project Analyst (SPA) on their full body of work each quarter; quarterly winners become the annual candidate pool.',
+    eligibility:'Staffing Project Analyst (SPA) team members', nominator:'SPA leadership selects each quarter — no open nomination form',
+    deadlineLabel:'Leadership-nominated — no employee-facing deadline', deadline:null,
+    recognition:'$500/quarter, $1,000/year, plus an email signature badge',
+    purpose:'Rewards SPA team members for consistent, high-quality staffing support work.',
+    criteria:'Same Strategic Resourcing MVP structure as SEM/RM/DST — quality, consistency, and impact within the SPA role.',
+    requirements:'No employee submission — SPA leadership selects the winner each quarter.',
+    examples:'An SPA whose process consistently kept staffing paperwork ahead of deadline across a busy quarter.',
+    timeline:'One winner per quarter; quarterly winners become Yearly award nominees.',
+    howTo:'Leadership nomination — no open form'
+  },
+  {
+    id:'srx-gspm-mvp', name:'SRX / GSPM MVP', type:'leadership', freq:'annual', team:'sr',
+    categoryLabel:'Leadership-Selected', color:'var(--navy)', badgeClass:'type-leadership',
+    who:'SRX & GSPM team',
+    desc:'Annual recognition for outstanding performance and impact within Strategic Resourcing Experience & Global Services Partner Management.',
+    eligibility:'SRX & GSPM team members', nominator:'SRX & GSPM leads nominate; senior leaders select',
+    deadlineLabel:'Leadership-nominated — no employee-facing deadline', deadline:null,
+    recognition:'$1,000 annual bonus',
+    purpose:"Recognizes a team member who exemplifies exceptional performance, collaboration, leadership, and WWT's core values.",
+    criteria:"Exceptional performance, collaboration and teamwork, leadership and initiative, impact and results, and embodiment of WWT's core values.",
+    requirements:'No employee submission — nominated internally by SRX/GSPM leads.',
+    examples:'A GSPM lead who redesigned a partner-management process now used org-wide.',
+    timeline:'One winner selected annually.',
+    howTo:'Leadership nomination — no open form'
+  }
+];
+
+const RECOGNITIONS = [
+  {name:'Devon Ruiz', team:'Cloud Infrastructure', award:'World Wide Way to Go (WWWTG)', why:'Resolved a production outage in under 20 minutes, ahead of the SLA.'},
+  {name:'Aisha Kone', team:'Client Delivery', award:'Customer Delight (CD)', why:'A client named her directly in writing for turning around a churn-risk account.'},
+  {name:'Ben Carter', team:'Security Engineering', award:'BIG Thank You', why:"His manager sent a personal note after he volunteered to backfill a teammate on short notice."},
+  {name:'Priya Shah', team:'Network Delivery', award:'Leading with Excellence (ATS)', why:"Selected by her Area Director as the ATS team's quarterly standout for a 3-team migration delivered early."},
+  {name:'Marcus Lee', team:'Data Platform', award:'PMO HPT-MVP', why:'Named HPT-MVP of the Month for rebuilding the reporting pipeline with zero downtime.'},
+  {name:'Grace Kim', team:'Field Services', award:'World Wide Way to Go (WWWTG)', why:'Sent a WWWTG e-card after covering two client sites solo during a staffing gap.'}
+];
+
+const FAQS = [
+  {q:'Who can nominate?', a:'It depends on the award. Most programs — WWWTG, Customer Delight, Leading with Excellence, PMO HPT-MVP, and Regional Manager of the Quarter — are open to anyone (or to managers and peers). BIG Thank You and the TD&E Award are both manager-submitted. The five Strategic Resourcing MVPs (SEM, RM, DST, SPA, SRX/GSPM) are nominated internally by leadership with no open form. Check the specific award card for the exact rule.'},
+  {q:'Can I nominate myself?', a:'None of the published program guidelines mention self-nomination, so treat it as ask-your-manager-first territory rather than assuming it\'s allowed.'},
+  {q:'Can I nominate someone more than once?', a:'There\'s no stated cap across cycles in the source guidelines. Customer Delight is the one explicit exception — it\'s capped at one Incentive Reward per person per quarter.'},
+  {q:'How are winners selected?', a:'It varies by award: peer and manager-led programs have no selection committee, quarterly merit awards (Leading with Excellence, PMO HPT-MVP, Regional Manager of the Quarter) go through the respective Area Director, the TD&E Award is voted on by VPs, and the four Strategic Resourcing MVPs are chosen internally by SR leadership.'},
+  {q:'What should I include in a nomination?', a:'As much specific detail as possible. The TD&E Award guidelines explicitly note that more detail in the write-up sections improves the odds of being selected.'},
+  {q:'Can interns be nominated?', a:'Not addressed in any of the current program guidelines. Most awards specify FTE/FTC employment types, with Customer Delight also covering Strategic Resourcing contractors and contingent workers. If you have an intern in mind, check with TD&E Strategic Initiatives before submitting.'},
+  {q:'What happens after I submit?', a:'You\'ll get a confirmation from the Celebration Station (or relevant) form. From there it routes to the reviewing manager, Area Director, or leadership group for that award, and winners are announced through the channel tied to that program — an All-Hands, a Practice Page feature, or a direct note.'}
+];
+
+/* ===================== RENDER AWARD CARDS ===================== */
+function daysUntil(dateStr){
+  if(!dateStr) return null;
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const target = new Date(dateStr+'T00:00:00');
+  return Math.round((target - today) / 86400000);
+}
+function statusFor(days){
+  if(days <= 7) return 'red';
+  if(days <= 30) return 'yellow';
+  return 'green';
+}
+function awardStatus(a){
+  if(!a.deadline){
+    if(a.freq === 'ongoing') return {code:'blue', label:'Always Open', days:null};
+    return {code:'grey', label:'Leadership-Selected', days:null};
+  }
+  const days = daysUntil(a.deadline);
+  const code = statusFor(days);
+  const label = code==='red' ? 'Closing soon' : code==='yellow' ? 'Approaching' : 'On track';
+  return {code, label, days};
+}
+function formatDate(dateStr){
+  if(!dateStr) return null;
+  const d = new Date(dateStr+'T00:00:00');
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+
+function renderAwards(list){
+  const grid = document.getElementById('award-grid');
+  grid.innerHTML = list.map(a => {
+    const st = awardStatus(a);
+    const pillText = st.code === 'blue' ? 'Ongoing' : st.code === 'grey' ? 'Leadership-selected' : `Due ${formatDate(a.deadline)}`;
+    return `
+    <div class="award-card" data-type="${a.type}" data-freq="${a.freq}">
+      <div class="band" style="background:${a.color}"></div>
+      <div class="content">
+        <div class="badge-row">
+          <span class="badge ${a.badgeClass}">${a.categoryLabel || a.type}</span>
+        </div>
+        <h3>${a.name}</h3>
+        <p class="desc">${a.desc}</p>
+        <div class="meta-list">
+          <div><span class="k">Who</span><span>${a.who || a.eligibility}</span></div>
+        </div>
+        <span class="status-pill ${st.code}" style="margin-bottom:14px;display:inline-block;"><span class="status-dot ${st.code}"></span>${pillText}</span>
+        <div class="card-actions">
+          <button class="btn btn-outline btn-sm" onclick="toggleAccordion('${a.id}')">View Details</button>
+          <button class="btn btn-primary btn-sm" onclick="alert('Opens nomination form pre-filled for: ${a.name}')">Nominate</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderAwards(AWARDS);
+
+let currentFreqFilter = 'all';
+let currentTeamFilter = 'all';
+function setFilter(f, el){
+  document.querySelectorAll('.filter-chip:not(.team-chip)').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  currentFreqFilter = f;
+  filterAwards();
+}
+function setTeamFilter(t, el){
+  document.querySelectorAll('.team-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  currentTeamFilter = t;
+  filterAwards();
+}
+function filterAwards(){
+  const q = document.getElementById('award-search').value.toLowerCase();
+  const filtered = AWARDS.filter(a=>{
+    const matchesFilter = currentFreqFilter==='all' || a.type===currentFreqFilter || a.freq===currentFreqFilter;
+    const matchesTeam = currentTeamFilter==='all' || a.team===currentTeamFilter;
+    const haystack = (a.name+' '+a.desc+' '+a.eligibility+' '+a.nominator).toLowerCase();
+    const matchesSearch = haystack.includes(q);
+    return matchesFilter && matchesTeam && matchesSearch;
+  });
+  renderAwards(filtered);
+}
+
+/* ===================== DEADLINES TABLE ===================== */
+function renderDeadlines(){
+  // Dated awards first (soonest to latest), then Ongoing, then Leadership-Selected
+  const rank = a => a.deadline ? 0 : (a.freq === 'ongoing' ? 1 : 2);
+  const sorted = [...AWARDS].sort((a,b)=>{
+    const r = rank(a) - rank(b);
+    if(r !== 0) return r;
+    if(a.deadline && b.deadline) return daysUntil(a.deadline) - daysUntil(b.deadline);
+    return 0;
+  });
+  document.getElementById('deadline-body').innerHTML = sorted.map(a=>{
+    const st = awardStatus(a);
+    const dateCol = a.deadline ? formatDate(a.deadline) : a.deadlineLabel;
+    const daysCol = st.days === null ? '—' : `${st.days} days`;
+    const calCol = a.deadline ? `<button class="btn btn-outline btn-sm" style="padding:8px 10px;" title="Download calendar file" data-ics-id="${a.id}">📅</button>` : '—';
+    return `<tr>
+      <td><b>${a.name}</b></td>
+      <td>${dateCol}</td>
+      <td><span class="status-pill ${st.code}"><span class="status-dot ${st.code}"></span>${st.label}</span></td>
+      <td class="days-left">${daysCol}</td>
+      <td>${calCol}</td>
+    </tr>`;
+  }).join('');
+}
+renderDeadlines();
+
+/* ===================== ADD TO CALENDAR (.ics) ===================== */
+function pad2(n){ return String(n).padStart(2,'0'); }
+function downloadICS(awardId){
+  const a = AWARDS.find(x=>x.id===awardId);
+  if(!a || !a.deadline) return;
+  const d = a.deadline.replace(/-/g,''); // YYYYMMDD, all-day event
+  const now = new Date();
+  const stamp = now.getFullYear() + pad2(now.getMonth()+1) + pad2(now.getDate()) + 'T' + pad2(now.getHours()) + pad2(now.getMinutes()) + pad2(now.getSeconds()) + 'Z';
+  const uid = 'tde-' + a.id + '-' + d + '@wwt-recognition';
+  const desc = (a.deadlineLabel + ' — ' + a.desc).replace(/\n/g,'\\n');
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TD&E Rewards & Recognition//EN','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:'+uid,
+    'DTSTAMP:'+stamp,
+    'DTSTART;VALUE=DATE:'+d,
+    'SUMMARY:'+a.name+' — nomination deadline',
+    'DESCRIPTION:'+desc,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = a.id + '-deadline.ics';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+/* ===================== ACCORDION ===================== */
+function renderAccordion(){
+  document.getElementById('accordion-list').innerHTML = AWARDS.map(a=>`
+    <div class="accordion-item" id="acc-${a.id}">
+      <div class="accordion-head" onclick="toggleAccordion('${a.id}')">
+        <span>${a.name}</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="accordion-body">
+        <h5>Purpose</h5><p>${a.purpose}</p>
+        <h5>Eligibility</h5><p>${a.eligibility}</p>
+        <h5>Who Can Nominate</h5><p>${a.nominator}</p>
+        <h5>Nomination Requirements</h5><p>${a.requirements}</p>
+        <h5>Selection Criteria</h5><p>${a.criteria}</p>
+        <h5>Examples</h5><p>${a.examples}</p>
+        <h5>Timeline &amp; Deadline</h5><p>${a.deadlineLabel}. ${a.timeline}</p>
+        <h5>Recognition Received</h5><p>${a.recognition}</p>
+        ${a.sourceNote ? `<h5>⚠ Verify Before Publishing</h5><p>${a.sourceNote}</p>` : ''}
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-primary btn-sm" onclick="alert('Opens nomination form pre-filled for: ${a.name}')">Nominate Now</button>
+          ${a.deadline ? `<button class="btn btn-outline btn-sm" data-ics-id="${a.id}">📅 Add to Calendar</button>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+renderAccordion();
+function toggleAccordion(id){
+  const el = document.getElementById('acc-'+id);
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.accordion-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen){
+    el.classList.add('open');
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+/* ===================== RECOGNITION WALL ===================== */
+function initials(name){ return name.split(' ').map(n=>n[0]).join(''); }
+document.getElementById('wall-grid').innerHTML = RECOGNITIONS.map(r=>`
+  <div class="wall-card">
+    <div class="wall-top">
+      <div class="avatar">${initials(r.name)}</div>
+      <div><div class="wall-name">${r.name}</div><div class="wall-team">${r.team}</div></div>
+    </div>
+    <span class="wall-award">${r.award}</span>
+    <p class="wall-quote">${r.why}</p>
+  </div>`).join('');
+
+/* ===================== FAQ ===================== */
+document.getElementById('faq-list').innerHTML = FAQS.map((f,i)=>`
+  <div class="faq-item accordion-item" id="faq-${i}" style="border-radius:0;border:none;">
+    <div class="accordion-head" style="padding:16px 4px;" onclick="toggleFaq(${i})">
+      <span>${f.q}</span><span class="chevron">▾</span>
+    </div>
+    <div class="accordion-body" style="padding:0 4px;"><p>${f.a}</p></div>
+  </div>`).join('');
+function toggleFaq(i){
+  const el = document.getElementById('faq-'+i);
+  el.classList.toggle('open');
+}
+
+/* ===================== WIZARD ===================== */
+let wizardState = {};
+const WIZARD_STEPS = [
+  { key:'who', q:"What's the source of this recognition?",
+    options:[
+      {label:'A colleague or teammate (peer)', value:'peer'},
+      {label:'A customer said something great about them', value:'customer'},
+      {label:"You're their manager", value:'manager'},
+      {label:"You're a Director / Area Director or higher", value:'director'}
+    ]},
+  { key:'func', q:"Is this tied to a specific job function?",
+    options:[
+      {label:'No — general recognition', value:'general'},
+      {label:'Yes — Advanced Technical Solutions (ATS) work', value:'ats'},
+      {label:'Yes — Infrastructure/Staffing Services PMO work', value:'pmo'},
+      {label:'Yes — Regional Manager / Program Director work', value:'rmpd'},
+      {label:'Yes — Strategic Resourcing (SEM/RM/DST/SPA/SRX-GSPM) work', value:'sr'}
+    ]},
+  { key:'scale', q:"How big is this?",
+    options:[
+      {label:'A quick thank-you moment', value:'moment'},
+      {label:"A quarter's worth of standout work", value:'quarter'},
+      {label:'Career-defining, top-of-TD&E-caliber work', value:'career'}
+    ]}
+];
+let wizardStep = 0;
+
+function openWizard(){
+  wizardState = {}; wizardStep = 0;
+  document.getElementById('wizard-overlay').classList.add('open');
+  renderWizardStep();
+}
+function closeWizard(){ document.getElementById('wizard-overlay').classList.remove('open'); }
+
+function renderWizardStep(){
+  ['wp1','wp2','wp3'].forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('done', i <= wizardStep && wizardStep < 3);
+  });
+  if(wizardStep >= WIZARD_STEPS.length){
+    renderWizardResult();
+    return;
+  }
+  const step = WIZARD_STEPS[wizardStep];
+  document.getElementById('wizard-body').innerHTML = `
+    <div class="wizard-q">Question ${wizardStep+1} of 3</div>
+    <h3>${step.q}</h3>
+    <div class="wizard-options">
+      ${step.options.map(o=>`<div class="wizard-option" onclick="answerWizard('${step.key}','${o.value}')">${o.label}</div>`).join('')}
+    </div>`;
+}
+function answerWizard(key, value){
+  wizardState[key] = value;
+  wizardStep++;
+  renderWizardStep();
+}
+function find(id){ return AWARDS.find(a=>a.id===id); }
+function recommendAward(){
+  const {who, func, scale} = wizardState;
+  let note = null;
+  if(who === 'customer') return { award: find('cd'), note };
+  if(func === 'ats') return { award: find('leading-excellence'), note };
+  if(func === 'pmo') return { award: find('pmo-hpt-mvp'), note };
+  if(func === 'rmpd') return { award: find('rm-award'), note };
+  if(func === 'sr'){
+    note = "Heads up: the Strategic Resourcing MVPs (SEM, RM, DST, SPA, SRX/GSPM) are nominated internally by leadership — there's no employee-facing form. Flag this to the person's lead so it's on their radar.";
+    return { award: find('sem-mvp'), note };
+  }
+  // func === 'general'
+  if(who === 'director'){
+    return scale === 'moment' ? { award: find('wwwtg'), note } : { award: find('tde-award'), note };
+  }
+  if(who === 'manager'){
+    if(scale === 'career'){
+      return { award: find('tde-award'), note };
+    }
+    return { award: find('big-thank-you'), note };
+  }
+  // peer
+  if(scale === 'moment') return { award: find('wwwtg'), note };
+  if(scale === 'career'){
+    note = "Only a manager can formally submit the TD&E Award. As a peer, use WWWTG now and loop in their manager to nominate.";
+    return { award: find('tde-award'), note };
+  }
+  note = "For sustained work like this, WWWTG covers the peer-to-peer piece now — also flag it to their manager so it's considered for a BIG Thank You or a formal quarterly award.";
+  return { award: find('wwwtg'), note };
+}
+function renderWizardResult(){
+  const { award, note } = recommendAward();
+  const deadlineDisplay = award.deadline ? formatDate(award.deadline) : award.deadlineLabel;
+  document.getElementById('wizard-body').innerHTML = `
+    <div class="wizard-result">
+      <span class="result-badge">Recommended Award</span>
+      <h3>${award.name}</h3>
+      <p style="color:var(--ink-light)">${award.desc}</p>
+      <div class="meta-list">
+        <div><span class="k">Deadline</span><span>${deadlineDisplay}</span></div>
+        <div><span class="k">Recognition</span><span style="text-align:right">${award.recognition}</span></div>
+      </div>
+      ${note ? `<p class="note" style="margin-top:12px;">${note}</p>` : ''}
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="btn btn-outline btn-sm" data-action="open-wizard">Start Over</button>
+        <button class="btn btn-primary btn-sm" style="flex:1" onclick="alert('Opens nomination form pre-filled for: ${award.name}')">Nominate for This Award</button>
+      </div>
+    </div>`;
+  celebrate();
+}
+
+/* ===================== CELEBRATION ANIMATION ===================== */
+function celebrate(){
+  const modal = document.querySelector('.modal');
+  if(!modal) return;
+  const colors = ['#0086EA','#EE282A','#1C0087','#FB550E','#E31C79','#162FB4'];
+  const piece_count = 26;
+  for(let i=0;i<piece_count;i++){
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    const size = 6 + Math.random()*5;
+    piece.style.width = size+'px';
+    piece.style.height = (size*0.4)+'px';
+    piece.style.background = colors[i % colors.length];
+    piece.style.left = (45 + Math.random()*10) + '%';
+    piece.style.top = '18px';
+    const dx = (Math.random()*2-1) * 160;
+    const dy = 140 + Math.random()*120;
+    const rot = (Math.random()*2-1) * 360;
+    piece.style.setProperty('--dx', dx+'px');
+    piece.style.setProperty('--dy', dy+'px');
+    piece.style.setProperty('--rot', rot+'deg');
+    piece.style.animationDelay = (Math.random()*0.15)+'s';
+    modal.appendChild(piece);
+    setTimeout(()=>piece.remove(), 1400);
+  }
+}
+
+/* ===================== MISC ===================== */
+function jumpToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+/* ===================== EVENT DELEGATION =====================
+   Bound via addEventListener instead of inline onclick attributes.
+   Some corporate email/Teams/SharePoint attachment scanners strip
+   inline on* handlers from downloaded HTML for security reasons —
+   this keeps every interactive control working even if that happens. */
+document.body.addEventListener('click', function(e){
+  const wizardBtn = e.target.closest('[data-action="open-wizard"]');
+  if(wizardBtn){ openWizard(); return; }
+
+  const jumpBtn = e.target.closest('[data-jump]');
+  if(jumpBtn){ jumpToSection(jumpBtn.dataset.jump); return; }
+
+  const icsBtn = e.target.closest('[data-ics-id]');
+  if(icsBtn){ downloadICS(icsBtn.dataset.icsId); return; }
+});
+
+/* Live countdown for hero — ticks against the viewer's real clock */
+/* Finds whichever dated award has the soonest FUTURE deadline right now.
+   Re-run this (not just the clock) so that when one deadline passes,
+   the hero card automatically swaps to whatever is next in line —
+   nothing here is hardcoded to a single award. */
+let heroTrackedAwardId = null;
+function getNextUpcomingAward(){
+  const dated = AWARDS.filter(a => a.deadline && daysUntil(a.deadline) >= 0);
+  if(dated.length === 0) return null;
+  return dated.reduce((soonest, a) => daysUntil(a.deadline) < daysUntil(soonest.deadline) ? a : soonest);
+}
+function updateHeroCountdown(){
+  const award = getNextUpcomingAward();
+  const awardEl = document.getElementById('hero-countdown-award');
+  const statusEl = document.getElementById('hero-countdown-status');
+  const icsBtn = document.getElementById('hero-countdown-ics');
+
+  if(!award){
+    awardEl.textContent = 'No upcoming deadlines right now';
+    statusEl.textContent = '';
+    icsBtn.style.display = 'none';
+    document.querySelectorAll('#hero-countdown .num').forEach(n => n.textContent = '00');
+    return;
+  }
+
+  // Only touch the DOM text/target when the "next" award actually changes,
+  // so the countdown doesn't visibly reset every tick.
+  if(award.id !== heroTrackedAwardId){
+    heroTrackedAwardId = award.id;
+    awardEl.textContent = `${award.name} — closes ${formatDate(award.deadline)}`;
+    icsBtn.dataset.icsId = award.id;
+    icsBtn.style.display = '';
+  }
+
+  const target = new Date(award.deadline + 'T23:59:59');
+  const now = new Date();
+  const diff = Math.max(0, target - now);
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  const nums = document.querySelectorAll('#hero-countdown .num');
+  nums[0].textContent = String(d).padStart(2,'0');
+  nums[1].textContent = String(h).padStart(2,'0');
+  nums[2].textContent = String(m).padStart(2,'0');
+  nums[3].textContent = String(s).padStart(2,'0');
+
+  const days = daysUntil(award.deadline);
+  const code = statusFor(days);
+  const label = code==='red' ? '🔴 Closing soon' : code==='yellow' ? '🟡 Approaching' : '🟢 On track';
+  const bg = code==='red' ? '#FDEAEA' : code==='yellow' ? '#FFF6DC' : '#E4F7EC';
+  const fg = code==='red' ? '#EE282A' : code==='yellow' ? '#8A6D00' : '#1E9E5A';
+  statusEl.textContent = label;
+  statusEl.style.background = bg;
+  statusEl.style.color = fg;
+
+  if(diff <= 0){
+    // This deadline just passed — force a recheck so the next award takes over immediately.
+    heroTrackedAwardId = null;
+    updateHeroCountdown();
+  }
+}
+updateHeroCountdown();
+setInterval(updateHeroCountdown, 1000);
+</script>
+</body>
+</html>
